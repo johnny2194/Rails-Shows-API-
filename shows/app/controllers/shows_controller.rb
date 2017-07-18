@@ -1,7 +1,7 @@
 class ShowsController < ApplicationController
 
   def index 
-    shows = show.all()
+    shows = Show.all()
     render json: shows
   end
 
@@ -11,13 +11,13 @@ class ShowsController < ApplicationController
   end  
 
   def create
-    show = Show.create( animal_params )
+    show = Show.create( show_params )
     render json: show
   end
 
   def update
     show = Show.find(params[:id])
-    if show.update_attributes(animal_params)
+    if show.update_attributes(show_params)
       render :json => show
     end
   end 
@@ -32,7 +32,7 @@ class ShowsController < ApplicationController
   end 
 
   private 
-  def animal_params
+  def show_params
     params.require(:show).permit([:title, :series, :description, :image, :programmeID])
   end
 
